@@ -4,9 +4,12 @@ Excel转Lua表：提取公共table。
 添加一种setconfigtable来访问，经测试比setmetatable快27倍。需要修改lua源码。
 
 给lua添加一个新的flag：
+```
 #define TM_INDIRECT_INDEX (TM_EQ + 1)
+```
 然后修改luaV_finishget：
 
+```
 void luaV_finishget (lua_State *L, const TValue *t, TValue *key, StkId val,
                       const TValue *slot) {
   int loop;  /* counter to avoid infinite loops */
@@ -55,3 +58,4 @@ void luaV_finishget (lua_State *L, const TValue *t, TValue *key, StkId val,
   }
   luaG_runerror(L, "'__index' chain too long; possible loop");
 }
+```
