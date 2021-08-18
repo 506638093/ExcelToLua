@@ -31,7 +31,7 @@ void luaV_finishget (lua_State *L, const TValue *t, TValue *key, StkId val,
       if (tm == NULL) {  /* no metamethod? */
 
         /*HuaHua*/
-        if (mt != NULL && (mt->flags &= (1u << TM_INDIRECT_INDEX))){
+        if (mt != NULL && (mt->flags & (1u << TM_INDIRECT_INDEX))){
             mk = luaH_get(mt, key);
             if (mk != NULL){
                 slot = luaH_get(ot, mk);
